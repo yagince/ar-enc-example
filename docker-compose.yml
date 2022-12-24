@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:15.1-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=ar_enc_example_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    container_name: app
+    build:
+      context: .
+      args:
+        bundle_install_options: --jobs 10
+        target: dev
+    volumes:
+      - ./:/app:cached
+    environment:
+      RAILS_LOG_TO_STDOUT: 1
+      TZ: Asia/Tokyo
+    ports:
+      - 3001:3000
+    tty: true
+    command: /bin/sh -l -c 'bundle && bin/rails s'
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
+    driver: local
