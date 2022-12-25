@@ -18,9 +18,11 @@ services:
     container_name: app
     build:
       context: .
+      target: dev
       args:
         bundle_install_options: --jobs 10
-        target: dev
+      cache_from:
+        - ar-enc-example-app
     volumes:
       - ./:/app:cached
     environment:
