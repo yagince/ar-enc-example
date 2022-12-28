@@ -27,8 +27,8 @@ module ArEncExample
     config.active_record.encryption.support_unencrypted_data = true
     config.active_record.encryption.store_key_references = true
 
-    config.active_record.encryption.primary_key         = ENV["AR_ENC_PRIMARY_KEY"]
-    config.active_record.encryption.deterministic_key   = ENV["AR_ENC_DETERMINISTIC_KEY"]
+    config.active_record.encryption.primary_key         = [ENV["AR_ENC_PRIMARY_KEY"], ENV["AR_ENC_PRIMARY_KEY_NEW"] || ""]
+    config.active_record.encryption.deterministic_key   = [ENV["AR_ENC_DETERMINISTIC_KEY"], ENV["AR_ENC_DETERMINISTIC_KEY_NEW"] || ""]
     config.active_record.encryption.key_derivation_salt = ENV["AR_ENC_KEY_DERIVATION_SALT"]
   end
 end
