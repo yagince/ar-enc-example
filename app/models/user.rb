@@ -1,3 +1,4 @@
 class User < ApplicationRecord
-  encrypts :address, deterministic: { fixed: false }, previous: { deterministic: false }
+  encrypts :name
+  encrypts :address, deterministic: true
 end
