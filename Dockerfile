@@ -1,4 +1,4 @@
-FROM ruby:3.1.2-alpine3.15 AS ruby
+FROM ruby:3.3.0-alpine3.18 AS ruby
 
 ## Development
 FROM ruby AS dev
